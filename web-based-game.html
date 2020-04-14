@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<head> 
+    <meta charset="utf-8">
+    <link rel ="stylesheet" type="text/css" href = "style.css"> 
+</head>
+<header>
+    Would you like to play a game?
+</header>
+<main>
+    <div class = "selection">Pick your move.</div>
+    <div class = "choice">
+        <button id="Rock">Rock</button>
+        <button id="Paper">Paper</button>
+        <button id="Scissors">Scissors</button>
+    </div>
+    <div class = "tracker" id="tracker"></div>
+    </div>
+</main>
+
+<script>
+let user = "";
+let winCount = 0;
+let loseCount = 0;
+const track = document.createElement("p");
+
+const buttons = document.querySelectorAll("button"); // this code plays te game on click of the button and tracks the win or losses/
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            user = button.id;
+            alert(playRound(user, computerPlay()));
+            track.classList.add('track');
+            if (winCount >= 5) {
+                track.textContent = `You have won ${winCount} games! You're the WINNER!`;
+            } else if (loseCount >= 5) {
+                track.textContent = `the computer has won ${loseCount} games. You LOST, try again soon.`;
+            } else {
+                track.textContent = `You have won ${winCount} games.\n The Computer has won ${loseCount} games.`;
+            }
+            tracker.appendChild(track);
+            })
+    });
+
+
+function game() {
+    let i = 0;
+    while (i < 5) {
+        let playerSelection = getUser();
+        let computerSelection = computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+        i++;
+    }
+}
+
+
+function computerPlay() {
+    let playIndex = Math.random()*3;
+    if (playIndex <= 1) {
+            return "Rock";
+    } else if (playIndex <= 2) {
+            return "Scissors";
+    } else if (playIndex <= 3){
+            return "Paper";
+    }
+}
+
+
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection == "Rock" && computerSelection == "Paper") {
+        loseCount++;
+        return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    } else if (playerSelection == "Paper" && computerSelection == "Scissors"){
+        loseCount++;
+        return `You Lose! ${computerSelection} beats ${playerSelection}`
+    } else if (playerSelection == "Scissors" && computerSelection == "Rock") {
+        loseCount++;
+        return `You Lose! ${computerSelection} beats ${playerSelection}`
+    } else if (playerSelection == "Rock" && computerSelection =="Scissors") {
+        winCount++;
+        return `You Win! ${playerSelection} beats ${computerSelection}`
+    } else if (playerSelection == "Paper" && computerSelection =="Rock") {
+        winCount++;
+        return `You Win! ${playerSelection} beats ${computerSelection}`
+    } else if (playerSelection == "Scissors" && computerSelection == "Paper") {
+        winCount++;
+        return `You Win! ${playerSelection} beats ${computerSelection}`
+    } else if ( playerSelection == computerSelection) {
+        return "Draw! Try again."
+    }
+}
+
+</script>

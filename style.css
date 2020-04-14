@@ -1,0 +1,28 @@
+.selection {
+    display:flex;
+    justify-content: center;
+}
+#rock{
+    align-self: flex-start;
+}
+
+#scissors{
+    align-self: flex-end;
+}
+
+.choice {
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+}
+
+.result {
+    display: flex;
+    justify-content: center;
+}
+
+.tracker {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
